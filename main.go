@@ -5,7 +5,9 @@ import "fmt"
 func main() {
 	const conference_tickets = 50
 
-	var user_name string
+	var user_first_name string
+	var user_last_name string
+	var user_email_addr string
 	var user_tickets int
 
 	conference_name := "Intercogni Monthly"
@@ -20,11 +22,19 @@ func main() {
 		conference_tickets, remaining_tickets)
 	fmt.Println("Get your tickets here to attend")
 
-	fmt.Printf("Please enter your name: ")
-	fmt.Scan(&user_name)
+	fmt.Printf("Please enter your first name: ")
+	fmt.Scan(&user_first_name)
+
+	fmt.Printf("Please enter your last name: ")
+	fmt.Scan(&user_last_name)
+
+	fmt.Printf("Please enter your email address: ")
+	fmt.Scan(&user_email_addr)
+
 	fmt.Printf("Please enter the number of tickets to book: ")
 	fmt.Scan(&user_tickets)
+
 	fmt.Printf(
-		"Successfully booked %v ticket/s for %v \n",
-		user_tickets, user_name)
+		"Successfully booked %v ticket/s for %v %v. Confirmation sent to %v \n",
+		user_tickets, user_first_name, user_last_name, user_email_addr)
 }
