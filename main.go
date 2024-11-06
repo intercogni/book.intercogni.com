@@ -5,12 +5,12 @@ import "fmt"
 func main() {
 	const conference_tickets = 50
 
-	var bookings []string
 	var user_email_addr string
 	var user_name_first string
 	var user_name_last string
 	var user_tickets int
 
+	bookings := []string{}
 	conference_name := "Intercogni Monthly"
 	remaining_tickets := 50
 
@@ -45,7 +45,5 @@ func main() {
 		"%v tickets now remains for %v\n",
 		remaining_tickets, conference_name)
 
-	fmt.Printf("bookings array data: %v\n", bookings)
-	fmt.Printf("bookings array type: %T\n", bookings)
-	fmt.Printf("bookings array size: %v\n", len(bookings))
+	fmt.Printf("bookings: %v\n", bookings)
 }
