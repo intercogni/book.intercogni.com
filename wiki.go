@@ -1,20 +1,20 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"text/template"
 )
 
 type Page struct {
-	title string
-	body  []byte
+	Title string
+	Body  []byte
 }
 
 func (p *Page) save() error {
-	filename := p.title + ".txt"
-	return os.WriteFile(filename, p.body, 0600)
+	filename := p.Title + ".txt"
+	return os.WriteFile(filename, p.Body, 0600)
 }
 
 func loadPage(title string) (*Page, error) {
@@ -24,31 +24,27 @@ func loadPage(title string) (*Page, error) {
 		return nil, err
 	}
 
-	return &Page{title: title, body: body}, nil
+	return &Page{Title: title, Body: body}, nil
+}
+
+func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
+	t, _ := template.ParseFiles(tmpl + ".html")
+	t.Execute(w, p)
 }
 
 func handleView(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[len("/view/"):]
 	p, _ := loadPage(title)
-	fmt.Fprintf(w, "<h1>%s</h1><div>%s</div>", p.title, p.body)
+	renderTemplate(w, "view", p)
 }
 
 func handleEdit(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[len("/edit"):]
 	p, err := loadPage(title)
 	if err != nil {
-		p = &Page{title: title}
+		p = &Page{Title: title}
 	}
-
-	fmt.Fprintf(
-		w, 
-		"<h1>Editing %s</h1>"+
-		"<form action=\"/save/%s\" method=\"POST\">"+
-        "<textarea name=\"body\">%s</textarea><br>"+
-        "<input type=\"submit\" value=\"Save\">"+
-        "</form>",
-		p.title, p.title, p.body,
-	)
+	renderTemplate(w, "edit", p)
 }
 
 func main() {
