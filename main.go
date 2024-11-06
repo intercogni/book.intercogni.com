@@ -5,7 +5,7 @@ import "fmt"
 func main() {
 	const conference_tickets = 50
 
-	var bookings [50]string
+	var bookings []string
 	var user_email_addr string
 	var user_name_first string
 	var user_name_last string
@@ -27,7 +27,7 @@ func main() {
 	fmt.Scan(&user_name_first)
 	fmt.Printf("Please enter your last name: ")
 	fmt.Scan(&user_name_last)
-	bookings[0] = user_name_first + " " + user_name_last
+	bookings = append(bookings, user_name_first+" "+user_name_last)
 
 	fmt.Printf("Please enter your email address: ")
 	fmt.Scan(&user_email_addr)
