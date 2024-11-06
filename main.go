@@ -34,8 +34,8 @@ func main() {
 		fmt.Printf("Please enter your last name: ")
 		fmt.Scan(&user_name_last)
 
-		stat_valid_user_name := len(user_name_first) >= 2 && len(user_name_last) >= 2
-		if !stat_valid_user_name {
+		is_valid_user_name := len(user_name_first) >= 2 && len(user_name_last) >= 2
+		if !is_valid_user_name {
 			fmt.Printf("!!! You seem to have entered an invalid name, please try again !!!\n")
 			goto __input_name
 		}
@@ -80,8 +80,8 @@ func main() {
 			remaining_tickets, conference_name)
 		fmt.Printf("----------\n\n")
 
-		stat_tickets_unavailable := remaining_tickets == 0
-		if stat_tickets_unavailable {
+		is_tickets_unavailable := remaining_tickets == 0
+		if is_tickets_unavailable {
 			fmt.Printf(
 				"This month's %v is booked out. Please come again next month!\n",
 				conference_name)
