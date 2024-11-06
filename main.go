@@ -9,27 +9,18 @@ import (
 func main() {
 	const conference_tickets = 50
 
-	var user_email_addr string
-	var user_name_first string
-	var user_name_last string
-	var user_tickets int
+	var bookings = make([]map[string]string, 0)
 
-	bookings := []string{}
 	conference_name := "Intercogni Monthly"
 	remaining_tickets := 50
 
 	utils.Greet(conference_name, conference_tickets, remaining_tickets)
 	for remaining_tickets > 0 && len(bookings) < 50 {
-		user_name_first, user_name_last, user_email_addr, user_tickets,
-			remaining_tickets, bookings = utils.BookOnce(
-			user_name_first, user_name_last, user_email_addr, user_tickets,
-			remaining_tickets, bookings,
-		)
+		user_data := utils.BookOnce(&remaining_tickets)
 
-		utils.PrintSummary(
-			user_tickets, bookings, user_email_addr,
-			remaining_tickets, conference_name,
-		)
+		bookings = append(bookings, user_data)
+
+		utils.PrintSummary(bookings, remaining_tickets, conference_name)
 
 		is_tickets_unavailable := remaining_tickets == 0
 		if is_tickets_unavailable {
