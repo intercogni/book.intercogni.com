@@ -26,7 +26,7 @@ func main() {
 		conference_tickets, remaining_tickets)
 	fmt.Printf("Get your tickets here to attend\n\n")
 
-	for {
+	for remaining_tickets > 0 && len(bookings) < 50 {
 		fmt.Printf("Please enter your first name: ")
 		fmt.Scan(&user_name_first)
 		fmt.Printf("Please enter your last name: ")
