@@ -11,8 +11,8 @@ func main() {
 	conference_name := "Intercogni Monthly"
 	remaining_tickets := 50
 
-	user_name = "Taib"
-	user_tickets = 1
+	// user_name = "Taib"
+	// user_tickets = 1
 
 	fmt.Printf("Sign up for %v for IoT and Robotics\n", conference_name)
 	fmt.Printf(
@@ -20,5 +20,11 @@ func main() {
 		conference_tickets, remaining_tickets)
 	fmt.Println("Get your tickets here to attend")
 
-	fmt.Printf("User %v booked %v ticket/s\n", user_name, user_tickets)
+	fmt.Printf("Please enter your name: ")
+	fmt.Scan(&user_name)
+	fmt.Printf("Please enter the number of tickets to book: ")
+	fmt.Scan(&user_tickets)
+	fmt.Printf(
+		"Successfully booked %v ticket/s for %v \n",
+		user_tickets, user_name)
 }
