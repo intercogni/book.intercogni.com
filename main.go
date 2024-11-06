@@ -21,7 +21,7 @@ func main() {
 	fmt.Printf(
 		"%v are given this month and %v are still available\n",
 		conference_tickets, remaining_tickets)
-	fmt.Println("Get your tickets here to attend")
+	fmt.Printf("Get your tickets here to attend\n\n")
 
 	for {
 		fmt.Printf("Please enter your first name: ")
@@ -39,14 +39,14 @@ func main() {
 		remaining_tickets -= user_tickets
 
 		fmt.Printf(
-			"Successfully booked %v ticket/s for %v. Confirmation sent to %v \n",
+			"\nSuccessfully booked %v ticket/s for %v. Confirmation sent to %v \n",
 			user_tickets, bookings[0], user_email_addr)
 
 		fmt.Printf("----------\n")
 		fmt.Printf("bookings: %v\n", bookings)
 		fmt.Printf(
-			"%v tickets now remains for %v\n\n",
+			"%v tickets now remains for %v\n",
 			remaining_tickets, conference_name)
-		fmt.Printf("----------\n")
+		fmt.Printf("----------\n\n")
 	}
 }
