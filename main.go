@@ -12,4 +12,11 @@ func main() {
 		"%v are given this month and %v are still available\n",
 		conference_tickets, remaining_tickets)
 	fmt.Println("Get your tickets here to attend")
+
+	var user_name string
+	var user_tickets int
+
+	user_name = "Taib"
+	user_tickets = 1
+	fmt.Printf("User %v booked %v ticket/s\n", user_name, user_tickets)
 }
