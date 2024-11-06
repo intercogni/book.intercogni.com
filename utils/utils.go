@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func greet(conference_name string, conference_tickets int, remaining_tickets int) {
+func Greet(conference_name string, conference_tickets int, remaining_tickets int) {
 	fmt.Printf("Sign up for %v for IoT and Robotics\n", conference_name)
 	fmt.Printf(
 		"%v are given this month and %v are still available\n",
@@ -14,7 +14,7 @@ func greet(conference_name string, conference_tickets int, remaining_tickets int
 	fmt.Printf("Get your tickets here to attend\n\n")
 }
 
-func getFirstNames(bookings []string) []string {
+func GetFirstNames(bookings []string) []string {
 	first_names := []string{}
 	for _, booking := range bookings {
 		this_first_name := strings.Fields(booking)[0]
@@ -23,11 +23,11 @@ func getFirstNames(bookings []string) []string {
 	return first_names
 }
 
-func printSummary(
+func PrintSummary(
 	user_tickets int, bookings []string, user_email_addr string,
 	remaining_tickets int, conference_name string,
 ) {
-	first_names := getFirstNames(bookings)
+	first_names := GetFirstNames(bookings)
 
 	fmt.Printf(
 		"\nSuccessfully booked %v ticket/s for %v. Confirmation sent to %v \n",
@@ -39,7 +39,7 @@ func printSummary(
 		remaining_tickets, conference_name)
 	fmt.Printf("----------\n\n")
 }
-func bookOnce(
+func BookOnce(
 	user_name_first, user_name_last, user_email_addr string, user_tickets,
 	remaining_tickets int, bookings []string,
 ) (

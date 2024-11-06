@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+
+	"booking.intercogni.com/utils"
 )
 
 func main() {
@@ -16,15 +18,15 @@ func main() {
 	conference_name := "Intercogni Monthly"
 	remaining_tickets := 50
 
-	greet(conference_name, conference_tickets, remaining_tickets)
+	utils.Greet(conference_name, conference_tickets, remaining_tickets)
 	for remaining_tickets > 0 && len(bookings) < 50 {
 		user_name_first, user_name_last, user_email_addr, user_tickets,
-			remaining_tickets, bookings = bookOnce(
+			remaining_tickets, bookings = utils.BookOnce(
 			user_name_first, user_name_last, user_email_addr, user_tickets,
 			remaining_tickets, bookings,
 		)
 
-		printSummary(
+		utils.PrintSummary(
 			user_tickets, bookings, user_email_addr,
 			remaining_tickets, conference_name,
 		)
