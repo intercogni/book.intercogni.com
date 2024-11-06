@@ -34,7 +34,13 @@ func main() {
 	fmt.Printf("Please enter the number of tickets to book: ")
 	fmt.Scan(&user_tickets)
 
+	remaining_tickets -= user_tickets
+
 	fmt.Printf(
 		"Successfully booked %v ticket/s for %v %v. Confirmation sent to %v \n",
 		user_tickets, user_first_name, user_last_name, user_email_addr)
+
+	fmt.Printf(
+		"%v tickets now remains for %v\n",
+		remaining_tickets, conference_name)
 }
