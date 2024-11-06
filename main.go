@@ -43,7 +43,7 @@ func main() {
 
 		fmt.Printf(
 			"\nSuccessfully booked %v ticket/s for %v. Confirmation sent to %v \n",
-			user_tickets, bookings[0], user_email_addr)
+			user_tickets, bookings[len(bookings)-1], user_email_addr)
 
 		first_names := []string{}
 		for _, booking := range bookings {
@@ -57,5 +57,13 @@ func main() {
 			"%v tickets now remains for %v\n",
 			remaining_tickets, conference_name)
 		fmt.Printf("----------\n\n")
+
+		stat_tickets_unavailable := remaining_tickets == 0
+		if stat_tickets_unavailable {
+			fmt.Printf(
+				"This month's %v is booked out. Please come again next month!\n",
+				conference_name)
+			break
+		}
 	}
 }
