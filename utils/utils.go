@@ -3,7 +3,11 @@ package utils
 import (
 	"fmt"
 	"net/mail"
+	"sync"
+	"time"
 )
+
+var Wg = sync.WaitGroup{}
 
 type UserData struct {
 	first_name   string
@@ -31,6 +35,7 @@ func GetFirstNames(bookings []UserData) []string {
 func PrintSummary(
 	bookings []UserData, remaining_tickets int, conference_name string,
 ) {
+	time.Sleep(5 * time.Second)
 	first_names := GetFirstNames(bookings)
 
 	fmt.Printf(
@@ -45,6 +50,8 @@ func PrintSummary(
 		"%v tickets now remains for %v\n",
 		remaining_tickets, conference_name)
 	fmt.Printf("----------\n\n")
+
+	Wg.Done()
 }
 func BookOnce(remaining_tickets *int) UserData {
 	var user_data UserData

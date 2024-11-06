@@ -20,14 +20,16 @@ func main() {
 
 		bookings = append(bookings, user_data)
 
-		utils.PrintSummary(bookings, remaining_tickets, conference_name)
+		utils.Wg.Add(1)
+		go utils.PrintSummary(bookings, remaining_tickets, conference_name)
 
 		is_tickets_unavailable := remaining_tickets == 0
 		if is_tickets_unavailable {
 			fmt.Printf(
 				"This month's %v is booked out. Please come again next month!\n",
 				conference_name)
-			break
 		}
 	}
+
+	utils.Wg.Wait()
 }
