@@ -9,7 +9,7 @@ import (
 func main() {
 	const conference_tickets = 50
 
-	var bookings = make([]map[string]string, 0)
+	var bookings = make([]utils.UserData, 0)
 
 	conference_name := "Intercogni Monthly"
 	remaining_tickets := 50
