@@ -7,10 +7,9 @@ func main() {
 	const conference_tickets = 50
 	var remaining_tickets = 50
 
-	fmt.Println("Sign up for", conference_name, "for IoT and Robotics")
-	fmt.Println(
-		conference_tickets, "are given this month and", 
-		remaining_tickets, "are still available"
-	)
+	fmt.Printf("Sign up for %v for IoT and Robotics\n", conference_name)
+	fmt.Printf(
+		"%v are given this month and %v are still available\n",
+		conference_tickets, remaining_tickets)
 	fmt.Println("Get your tickets here to attend")
 }
