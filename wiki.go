@@ -27,10 +27,28 @@ func loadPage(title string) (*Page, error) {
 	return &Page{title: title, body: body}, nil
 }
 
-func viewHandler(w http.ResponseWriter, r *http.Request) {
+func handleView(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[len("/view/"):]
 	p, _ := loadPage(title)
 	fmt.Fprintf(w, "<h1>%s</h1><div>%s</div>", p.title, p.body)
+}
+
+func handleEdit(w http.ResponseWriter, r *http.Request) {
+	title := r.URL.Path[len("/edit"):]
+	p, err := loadPage(title)
+	if err != nil {
+		p = &Page{title: title}
+	}
+
+	fmt.Fprintf(
+		w, 
+		"<h1>Editing %s</h1>"+
+		"<form action=\"/save/%s\" method=\"POST\">"+
+        "<textarea name=\"body\">%s</textarea><br>"+
+        "<input type=\"submit\" value=\"Save\">"+
+        "</form>",
+		p.title, p.title, p.body,
+	)
 }
 
 func main() {
@@ -40,6 +58,8 @@ func main() {
 	// p2, _ := loadPage("TestPage")
 	// fmt.Println(string(p2.body))
 
-	http.HandleFunc("/view/", viewHandler)
+	http.HandleFunc("/view/", handleView)
+	http.HandleFunc("/edit/", handleEdit)
+	// http.HandleFunc("/save/", handleSave)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
