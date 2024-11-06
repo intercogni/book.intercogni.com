@@ -36,9 +36,16 @@ func main() {
 		fmt.Printf("Please enter your email address: ")
 		fmt.Scan(&user_email_addr)
 
+	book_tickets:
 		fmt.Printf("Please enter the number of tickets to book: ")
 		fmt.Scan(&user_tickets)
 
+		if user_tickets > remaining_tickets {
+			fmt.Printf(
+				"!!! Only %v tickets remain, please try booking with less tickets !!!\n",
+				remaining_tickets)
+			goto book_tickets
+		}
 		remaining_tickets -= user_tickets
 
 		fmt.Printf(
