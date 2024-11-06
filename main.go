@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/mail"
 	"strings"
 )
 
@@ -27,16 +28,30 @@ func main() {
 	fmt.Printf("Get your tickets here to attend\n\n")
 
 	for remaining_tickets > 0 && len(bookings) < 50 {
+	__input_name:
 		fmt.Printf("Please enter your first name: ")
 		fmt.Scan(&user_name_first)
 		fmt.Printf("Please enter your last name: ")
 		fmt.Scan(&user_name_last)
+
+		stat_valid_user_name := len(user_name_first) >= 2 && len(user_name_last) >= 2
+		if !stat_valid_user_name {
+			fmt.Printf("!!! You seem to have entered an invalid name, please try again !!!\n")
+			goto __input_name
+		}
 		bookings = append(bookings, user_name_first+" "+user_name_last)
 
+	__input_email:
 		fmt.Printf("Please enter your email address: ")
 		fmt.Scan(&user_email_addr)
 
-	book_tickets:
+		_, err := mail.ParseAddress(user_email_addr)
+		if err != nil {
+			fmt.Printf("!!! You seem to have entered an invalid email address, please try again !!!\n")
+			goto __input_email
+		}
+
+	__book_tickets:
 		fmt.Printf("Please enter the number of tickets to book: ")
 		fmt.Scan(&user_tickets)
 
@@ -44,7 +59,7 @@ func main() {
 			fmt.Printf(
 				"!!! Only %v tickets remain, please try booking with less tickets !!!\n",
 				remaining_tickets)
-			goto book_tickets
+			goto __book_tickets
 		}
 		remaining_tickets -= user_tickets
 
