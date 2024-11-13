@@ -18,7 +18,7 @@ type Album struct {
 
 var db *sql.DB
 
-func albumsByArtist(name string) ([]Album, error) {
+func getAlbumsByArtist(name string) ([]Album, error) {
 	var albums []Album
 
 	rows, err := db.Query("select * from album where artist = ?", name)
@@ -65,7 +65,7 @@ func main() {
 	}
 	fmt.Println("connected to recordings mega-library!!! (also called database)")
 
-	albums, err := albumsByArtist("John Coltrane")
+	albums, err := getAlbumsByArtist("John Coltrane")
 	if err != nil {
 		log.Fatal(err)
 	}
