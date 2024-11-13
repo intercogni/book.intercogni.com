@@ -44,6 +44,21 @@ func getAlbumsByArtist(name string) ([]Album, error) {
 	return albums, nil
 }
 
+func getAlbumByID(id int64) (Album, error) {
+	var alb Album
+
+	row := db.QueryRow("select * from album where id = ?", id)
+	err := row.Scan(&alb.ID, &alb.Title, &alb.Artist, &alb.Price)
+
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return alb, fmt.Errorf("albumsById %d: no such album", id)
+		}
+		return alb, fmt.Errorf("albumsById %d: %v", id, err)
+	}
+	return alb, nil
+}
+
 func main() {
 	cfg := mysql.Config{
 		User:   os.Getenv("DBUSER"),
@@ -69,6 +84,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Printf("albums found by artist: %v\n", albums)
 
-	fmt.Printf("albums found: %v\n", albums)
+	_alb, _err := getAlbumByID(2)
+	if _err != nil {
+		log.Fatal(_err)
+	}
+	fmt.Printf("album found by id: %v\n", _alb)
 }
